@@ -1,0 +1,31 @@
+{
+  "$schema": "https://agentinstruction.org/v1/air-v1.0.0.schema.json",
+  "version": "1.0",
+  "capabilities_required": [
+    "memory.extract"
+  ],
+  "execution_pipeline": [
+    {
+      "step": 1,
+      "action": "Extract",
+      "target": "SystemLogs",
+      "modifiers": {
+        "depth": "Critical"
+      }
+    }
+  ],
+  "constraints": [
+    {
+      "id": "c_1",
+      "priority": 1,
+      "type": "Lock",
+      "rule": "RawJSON",
+      "semantics": "Enforces immutable output boundary: RawJSON"
+    }
+  ],
+  "output_contract": {
+    "format": "JSON",
+    "strictness": "Absolute"
+  },
+  "diagnostics": []
+}

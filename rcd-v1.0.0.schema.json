@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RuntimeCapabilityDescriptor",
+  "type": "object",
+  "required": [
+    "runtimeId",
+    "capabilities"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "runtimeId": {
+      "type": "string"
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "version",
+          "operations"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "operations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "maxParallelism": {
+          "type": "integer"
+        },
+        "maxExecutionTimeMs": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "version": "1.0.0",
+  "note": "Closed, reserved Core Operator Set. Lexer emits KEYWORD for these; every other operator is an Extension Operator (IDENTIFIER). Reversing membership is ADR-gated.",
+  "actions": [
+    "Extract",
+    "Analyze",
+    "Synthesize",
+    "Generate",
+    "Transform",
+    "Compare",
+    "Evaluate",
+    "Convert",
+    "Compress",
+    "Expand",
+    "Optimize",
+    "Validate",
+    "Summarize",
+    "Translate",
+    "Classify",
+    "Rank"
+  ],
+  "constraints": [
+    "Lock",
+    "Shield"
+  ],
+  "modifierKeys": {
+    "policy": "open",
+    "note": "Modifier keys (e.g. Depth, Style, Audience) are Extension by default and graded via advisory.json. They are NOT reserved."
+  }
+}

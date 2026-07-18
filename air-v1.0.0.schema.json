@@ -1,0 +1,134 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AgentIntermediateRepresentation",
+  "type": "object",
+  "required": [
+    "$schema",
+    "version",
+    "capabilities_required",
+    "execution_pipeline",
+    "constraints",
+    "output_contract",
+    "diagnostics"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "version": {
+      "enum": [
+        "1.0"
+      ]
+    },
+    "capabilities_required": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "execution_pipeline": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "step",
+          "action",
+          "target",
+          "modifiers"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "step": {
+            "type": "integer"
+          },
+          "action": {
+            "type": "string"
+          },
+          "target": {
+            "type": "string"
+          },
+          "modifiers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "priority",
+          "type",
+          "rule"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "type": {
+            "enum": [
+              "Lock",
+              "Shield",
+              "Prefer",
+              "Allow",
+              "Limit"
+            ]
+          },
+          "rule": {
+            "type": "string"
+          },
+          "semantics": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "output_contract": {
+      "type": "object",
+      "required": [
+        "format",
+        "strictness"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "format": {
+          "enum": [
+            "JSON",
+            "Markdown",
+            "YAML",
+            "XML",
+            "Table",
+            "Raw"
+          ]
+        },
+        "strictness": {
+          "enum": [
+            "Absolute",
+            "Preferred"
+          ]
+        },
+        "schema": {
+          "type": "object"
+        }
+      }
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}

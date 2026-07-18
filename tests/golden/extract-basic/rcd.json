@@ -1,0 +1,23 @@
+{
+  "runtimeId": "OpenAI-Agent-Runtime",
+  "capabilities": [
+    {
+      "id": "memory.extract",
+      "version": "1.2",
+      "operations": [
+        "AIL.OP.EXTRACT"
+      ]
+    },
+    {
+      "id": "logic.synthesize",
+      "version": "1.0",
+      "operations": [
+        "AIL.OP.SYNTHESIZE"
+      ]
+    }
+  ],
+  "limits": {
+    "maxParallelism": 4,
+    "maxExecutionTimeMs": 60000
+  }
+}

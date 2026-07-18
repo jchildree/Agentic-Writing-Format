@@ -1,0 +1,110 @@
+{
+  "version": "1.0.0",
+  "scheme": "AIL-<PHASE>-<NNN>",
+  "note": "Codes self-locate to the emitting pass. severity/location/recovery are payload fields, never encoded in the code. Per-phase append-only.",
+  "phases": [
+    "LEX",
+    "PARSE",
+    "NORM",
+    "MACRO",
+    "NAME",
+    "SEM",
+    "TYPE",
+    "CAP",
+    "CON",
+    "OPT",
+    "EPI",
+    "FLOW",
+    "VERIFY",
+    "AIR",
+    "ARE"
+  ],
+  "codes": [
+    {
+      "code": "AIL-NORM-001",
+      "severity": "warning",
+      "message": "Block form input detected in Strict profile; key-to-operator mapping not yet frozen (RFC-001 Appendix A). No conformance guarantee."
+    },
+    {
+      "code": "AIL-TYPE-001",
+      "severity": "error",
+      "message": "Action node missing required edge type (TARGETS or PRODUCES)."
+    },
+    {
+      "code": "AIL-LEX-001",
+      "severity": "error",
+      "message": "Malformed or unrecognized token."
+    },
+    {
+      "code": "AIL-PARSE-002",
+      "severity": "error",
+      "message": "Missing target bound to primary action."
+    },
+    {
+      "code": "AIL-NAME-001",
+      "severity": "warning",
+      "message": "Unregistered operator resolved as Extension Operator (not a halt; see ADR-0001)."
+    },
+    {
+      "code": "AIL-NAME-002",
+      "severity": "error",
+      "message": "Duplicate resource symbol in scope."
+    },
+    {
+      "code": "AIL-NAME-005",
+      "severity": "warning",
+      "message": "Deprecated operator or macro usage."
+    },
+    {
+      "code": "AIL-CAP-003",
+      "severity": "error",
+      "message": "Target runtime lacks required capability."
+    },
+    {
+      "code": "AIL-CON-004",
+      "severity": "warning",
+      "message": "Priority conflict; higher-priority constraint overrides lower directive."
+    },
+    {
+      "code": "AIL-OPT-006",
+      "severity": "warning",
+      "message": "Optimization rejected: semantic risk 'high' or 'unknown'."
+    },
+    {
+      "code": "AIL-EPI-001",
+      "severity": "error",
+      "message": "Duplicate execution node identifier."
+    },
+    {
+      "code": "AIL-EPI-002",
+      "severity": "error",
+      "message": "Cyclic execution dependency (includes full path trace)."
+    },
+    {
+      "code": "AIL-EPI-003",
+      "severity": "error",
+      "message": "entryPoint references a non-existent or unrooted node."
+    },
+    {
+      "code": "AIL-EPI-004",
+      "severity": "error",
+      "message": "Missing edge source or target reference."
+    },
+    {
+      "code": "AIL-EPI-005",
+      "severity": "error",
+      "message": "Required capability unbound by any execution node."
+    }
+  ],
+  "migration": {
+    "AIL001": "AIL-LEX-001 (malformed) or AIL-NAME-001 (unregistered->warning under hybrid-core)",
+    "AIL002": "AIL-PARSE-002",
+    "AIL003": "AIL-CAP-003",
+    "AIL004": "AIL-CON-004",
+    "AIL005": "AIL-NAME-005",
+    "AIL006": "AIL-OPT-006",
+    "EPI001-005": "AIL-EPI-001..005",
+    "AIL-SYM-001/002": "AIL-NAME-001/002",
+    "AIL-PARSE-001": "AIL-PARSE-002"
+  }
+}

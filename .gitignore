@@ -1,0 +1,12 @@
+# Build artifacts
+compiler/ts/node_modules/
+compiler/ts/dist/
+
+# Local Claude state
+.claude/state/
+
+# External mount
+mnt/
+
+# Claud-itect external skill (large assets, not part of AWF spec)
+Claud-itect-Skill-main/

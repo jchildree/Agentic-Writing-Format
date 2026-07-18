@@ -1,0 +1,39 @@
+(* Agentic Writing Format (AWF) - Canonical Grammar v1.0.0            *)
+(* Normative surface = single-line OPERATOR FORM. Block form is       *)
+(* provisional sugar (RFC-001 Appendix A) and desugars to this in     *)
+(* PASS-003 Normalization before parsing.                             *)
+
+program        = { statement , newline } , statement , [ newline ] ;
+
+statement      = operator , ws , target , ws , "->" , ws , modifiers ,
+                 [ ws , "|" , ws , constraints ] , ws , "=>" , ws , output ;
+
+operator       = core-operator | extension-operator ;
+                 (* core-operator lexes as KEYWORD; extension as IDENTIFIER *)
+target         = identifier ;
+
+modifiers      = modifier , { ws , modifier } ;
+modifier       = key , ":" , value ;
+
+constraints    = constraint , { ws , constraint } ;
+constraint     = [ priority , ws ] , constraint-op , ":" , value ;
+priority       = "P" , digit ;
+constraint-op  = core-constraint | identifier ;
+
+output         = format ;
+format         = "JSON" | "Markdown" | "YAML" | "XML" | "Table" | "Raw"
+               | identifier ;
+
+key            = identifier ;
+value          = identifier | string ;
+identifier     = letter , { letter | digit | "_" } ;
+string         = '"' , { character } , '"' ;
+
+letter         = "A".."Z" | "a".."z" ;
+digit          = "0".."9" ;
+ws             = " " , { " " } ;
+newline        = "\n" | "\r\n" ;
+
+(* Column convention (normative): 1-indexed; token spans are half-open  *)
+(* [startColumn, endColumn), so endColumn = startColumn + length.       *)
+(* EOF is a cursor: startColumn == endColumn.                           *)

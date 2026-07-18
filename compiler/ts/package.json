@@ -1,0 +1,13 @@
+{
+  "name": "@awf/compiler",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/pipeline.js",
+  "scripts": {
+    "build": "tsc",
+    "conformance": "node dist/conformance.js"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

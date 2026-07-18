@@ -1,0 +1,22 @@
+{
+  "version": "1.0.0",
+  "entryPoint": "STEP.Action.AIL.OP.EXTRACT.1.1",
+  "nodes": [
+    {
+      "id": "STEP.Action.AIL.OP.EXTRACT.1.1",
+      "kind": "STEP",
+      "operation": "AIL.OP.EXTRACT",
+      "capability": "memory.extract",
+      "inputs": [
+        "Resource.AIL.RES.SYSTEMLOGS.1.9"
+      ],
+      "outputs": [
+        "Output.AIL.OUT.JSON.1.59"
+      ]
+    }
+  ],
+  "edges": [],
+  "requiredCapabilities": [
+    "memory.extract"
+  ]
+}

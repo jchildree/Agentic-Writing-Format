@@ -1,0 +1,8 @@
+{
+  "spec": "PASS-011",
+  "semanticGraphVersion": "1.0.0",
+  "executionPlanVersion": "1.0.0",
+  "controlFlowExpansionVersion": "0.0.0",
+  "serializer": "RFC-012",
+  "hashAlgorithm": "SHA-256"
+}

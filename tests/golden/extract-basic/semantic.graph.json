@@ -1,0 +1,99 @@
+{
+  "nodes": [
+    {
+      "id": "Action.AIL.OP.EXTRACT.1.1",
+      "kind": "Action",
+      "symbolId": "AIL.OP.EXTRACT",
+      "attributes": {},
+      "location": {
+        "startLine": 1,
+        "startColumn": 1,
+        "endLine": 1,
+        "endColumn": 8
+      }
+    },
+    {
+      "id": "Constraint.AIL.CON.LOCK.1.43",
+      "kind": "Constraint",
+      "symbolId": "AIL.CON.LOCK",
+      "attributes": {
+        "priority": "P1",
+        "value": "RawJSON"
+      },
+      "location": {
+        "startLine": 1,
+        "startColumn": 43,
+        "endLine": 1,
+        "endColumn": 47
+      }
+    },
+    {
+      "id": "Modifier.AIL.MOD.DEPTH.1.23",
+      "kind": "Modifier",
+      "symbolId": "AIL.MOD.DEPTH",
+      "attributes": {
+        "value": "Critical"
+      },
+      "location": {
+        "startLine": 1,
+        "startColumn": 23,
+        "endLine": 1,
+        "endColumn": 28
+      }
+    },
+    {
+      "id": "Output.AIL.OUT.JSON.1.59",
+      "kind": "Output",
+      "symbolId": "AIL.OUT.JSON",
+      "attributes": {
+        "format": "JSON"
+      },
+      "location": {
+        "startLine": 1,
+        "startColumn": 59,
+        "endLine": 1,
+        "endColumn": 63
+      }
+    },
+    {
+      "id": "Resource.AIL.RES.SYSTEMLOGS.1.9",
+      "kind": "Resource",
+      "symbolId": "AIL.RES.SYSTEMLOGS",
+      "attributes": {},
+      "location": {
+        "startLine": 1,
+        "startColumn": 9,
+        "endLine": 1,
+        "endColumn": 19
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "Action.AIL.OP.EXTRACT.1.1",
+      "to": "Constraint.AIL.CON.LOCK.1.43",
+      "type": "HAS_CONSTRAINT"
+    },
+    {
+      "from": "Action.AIL.OP.EXTRACT.1.1",
+      "to": "Modifier.AIL.MOD.DEPTH.1.23",
+      "type": "HAS_MODIFIER"
+    },
+    {
+      "from": "Action.AIL.OP.EXTRACT.1.1",
+      "to": "Output.AIL.OUT.JSON.1.59",
+      "type": "PRODUCES"
+    },
+    {
+      "from": "Action.AIL.OP.EXTRACT.1.1",
+      "to": "Resource.AIL.RES.SYSTEMLOGS.1.9",
+      "type": "TARGETS"
+    }
+  ],
+  "statements": [
+    {
+      "id": "STATEMENT.001",
+      "rootNode": "Action.AIL.OP.EXTRACT.1.1"
+    }
+  ]
+}

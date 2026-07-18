@@ -1,0 +1,65 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "Statement",
+      "operator": {
+        "type": "Operator",
+        "value": "Extract",
+        "location": {
+          "startLine": 1,
+          "startColumn": 1,
+          "endLine": 1,
+          "endColumn": 8
+        }
+      },
+      "target": {
+        "type": "Identifier",
+        "value": "SystemLogs",
+        "location": {
+          "startLine": 1,
+          "startColumn": 9,
+          "endLine": 1,
+          "endColumn": 19
+        }
+      },
+      "modifiers": [
+        {
+          "type": "Modifier",
+          "name": "Depth",
+          "value": "Critical",
+          "location": {
+            "startLine": 1,
+            "startColumn": 23,
+            "endLine": 1,
+            "endColumn": 37
+          }
+        }
+      ],
+      "constraints": [
+        {
+          "type": "Constraint",
+          "priority": "P1",
+          "name": "Lock",
+          "value": "RawJSON",
+          "location": {
+            "startLine": 1,
+            "startColumn": 40,
+            "endLine": 1,
+            "endColumn": 55
+          }
+        }
+      ],
+      "outputContract": {
+        "type": "OutputContract",
+        "format": "JSON",
+        "location": {
+          "startLine": 1,
+          "startColumn": 59,
+          "endLine": 1,
+          "endColumn": 63
+        }
+      }
+    }
+  ]
+}

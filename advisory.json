@@ -1,0 +1,44 @@
+{
+  "version": "1.0.0",
+  "note": "Advisory only. Consumed by the Lenient (Runtime) profile to interpret Extension Operators. Carries NO normative weight; Strict profile ignores it except to emit AIL-NAME-001 warnings.",
+  "operators": {
+    "Extract": {
+      "intent": "isolation",
+      "strength": 9,
+      "ambiguity": 0.1,
+      "mapsTo": [
+        "Retrieve",
+        "Isolate",
+        "Pull"
+      ]
+    },
+    "Analyze": {
+      "intent": "reasoning",
+      "strength": 8,
+      "ambiguity": 0.15,
+      "mapsTo": [
+        "Decompose",
+        "Inspect"
+      ]
+    },
+    "Synthesize": {
+      "intent": "composition",
+      "strength": 8,
+      "ambiguity": 0.2,
+      "mapsTo": [
+        "Merge",
+        "Combine"
+      ]
+    },
+    "Repair": {
+      "intent": "correction",
+      "strength": 7,
+      "ambiguity": 0.25,
+      "mapsTo": [
+        "Fix",
+        "Mend"
+      ],
+      "core": false
+    }
+  }
+}
