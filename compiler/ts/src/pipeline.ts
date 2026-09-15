@@ -21,8 +21,9 @@ export function compile(source: string, rcd: RCD): AIR {
   const { source: normalized, diagnostics: normDiags } = normalize(source.trimEnd());
   diagnostics.push(...normDiags);
 
-  const tokens = lex(normalized);
-  const ast = parse(tokens);
+  const lexResult = lex(normalized);
+  diagnostics.push(...lexResult.diagnostics);
+  const ast = parse(lexResult);
 
   const { ast: macroAst, diagnostics: macroDiags } = expandMacros(ast);
   diagnostics.push(...macroDiags);
