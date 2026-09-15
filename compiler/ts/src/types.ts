@@ -7,7 +7,7 @@ export interface Location {
 
 export type TokenType =
   | "KEYWORD" | "IDENTIFIER" | "ARROW" | "OUTPUT_ARROW"
-  | "COLON" | "PIPE" | "PRIORITY" | "EOF";
+  | "COLON" | "PIPE" | "PRIORITY" | "STRING" | "NUMBER" | "NEWLINE" | "EOF";
 
 export interface Token {
   type: TokenType;
@@ -17,6 +17,7 @@ export interface Token {
 
 export interface TokensOutput {
   tokens: Token[];
+  diagnostics: Diagnostic[];
 }
 
 export interface ASTOperator {
