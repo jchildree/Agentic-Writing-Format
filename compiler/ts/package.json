@@ -5,9 +5,11 @@
   "main": "dist/pipeline.js",
   "scripts": {
     "build": "tsc",
-    "conformance": "node dist/conformance.js"
+    "conformance": "node dist/conformance.js",
+    "smoke": "node dist/smoke.js"
   },
   "devDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
   }
 }

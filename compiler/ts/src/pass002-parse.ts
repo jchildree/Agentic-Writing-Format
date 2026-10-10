@@ -82,8 +82,10 @@ export function parse(input: TokensOutput): ASTProgram {
   }
 
   const body: ASTStatement[] = [];
+  while (peek().type === "NEWLINE") consume();
   while (peek().type !== "EOF") {
     body.push(parseStatement());
+    while (peek().type === "NEWLINE") consume();
   }
 
   return { type: "Program", body };

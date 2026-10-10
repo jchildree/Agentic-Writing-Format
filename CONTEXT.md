@@ -1,8 +1,8 @@
 # CONTEXT — AWF Glossary
 
 The single source of truth for terminology. Glossary only: no implementation
-details, no specs, no decisions (those live in `docs/adr/`). When a term here
-conflicts with usage anywhere else, this file wins.
+details, no specs, no decisions (those live in `docs/adr/` and `docs/rfc/`). When a
+term here conflicts with usage anywhere else, this file wins.
 
 ## Layers & seam
 

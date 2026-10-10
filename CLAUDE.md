@@ -26,7 +26,7 @@ cd compiler/ts && npm install && npm run build && npm run conformance
 # Expected: PASS f20f4ba7cb26a7408ea51d3a48e447d7d98160567199f9bae6b4617a7ee4fb7a
 ```
 
-Conformance is verified when a compiler reproduces the canonical AIR hash byte-for-byte. See `RFC-009-conformance-suite.md`.
+Conformance is verified when a compiler reproduces the canonical AIR hash byte-for-byte. See `docs/rfc/RFC-009-conformance-suite.md`.
 
 ## Architecture
 
@@ -60,9 +60,9 @@ Layer 1 (compiler/):
 
 **Core lexicon (closed, versioned):** 16 Core Actions + 2 Constraints in `spec/lexicon/core-operators.json`. Core Operators = `KEYWORD`; Extension Operators = `IDENTIFIER`. Strict profile compiles Extensions with a warning; Lenient profile interprets via advisory. Never add to core without a new ADR.
 
-**Node identity:** `kind.symbolId.startLine.startColumn` - content-stable, position-derived, order-independent (see ADR-0003).
+**Node identity:** `kind.symbolId.startLine.startColumn` - content-stable, position-derived, order-independent (see `docs/adr/0003-node-identity.md`).
 
-**Diagnostic codes:** `AIL-<PHASE>-<NNN>` where PHASE encodes which pass failed. Codes are append-only per phase (see `spec/diagnostics/registry.json` and ADR-0004).
+**Diagnostic codes:** `AIL-<PHASE>-<NNN>` where PHASE encodes which pass failed. Codes are append-only per phase (see `spec/diagnostics/registry.json` and `docs/adr/0004-diagnostic-codes.md`).
 
 **Reproducibility contract (RFC-012):** Identical input + Runtime Capability Descriptor -> byte-identical AIR across all implementations. The `canonicalize.py` script is the reference implementation.
 
@@ -70,16 +70,16 @@ Layer 1 (compiler/):
 
 | File | Purpose |
 |------|---------|
-| `PROTOCOL.md` | Master design protocol and decision index - read this before any architectural change |
+| `docs/PROTOCOL.md` | Master design protocol and decision index - read this before any architectural change |
 | `CONTEXT.md` | Authoritative glossary - single source of term definitions |
 | `spec/grammar/awf.ebnf` | Canonical EBNF grammar (1-indexed, half-open column spans) |
 | `spec/lexicon/core-operators.json` | Closed operator set |
-| `input.awf` | Golden fixture input: `Extract SystemLogs -> Depth:Critical | P1 Lock:RawJSON => JSON` |
+| `tests/golden/extract-basic/input.awf` | Golden fixture input: `Extract SystemLogs -> Depth:Critical | P1 Lock:RawJSON => JSON` |
 | `tests/golden/extract-basic/air.json` | Canonical AIR output (frozen snapshot) |
-| `RFC-009-conformance-suite.md` | Multi-language compiler conformance contract |
-| `RFC-012-canonical-serialization.md` | Byte-reproducibility guarantee |
+| `docs/rfc/RFC-009-conformance-suite.md` | Multi-language compiler conformance contract |
+| `docs/rfc/RFC-012-canonical-serialization.md` | Byte-reproducibility guarantee |
 
-ADRs (`0001-*.md` through `0006-*.md`) at repo root are closed decisions - they cannot be reopened without a new ADR. RFCs (`RFC-001` through `RFC-012`) are normative specs.
+ADRs (`docs/adr/0001-*.md` through `docs/adr/0006-*.md`) are closed decisions - they cannot be reopened without a new ADR. RFCs (`docs/rfc/RFC-001-*.md` through `docs/rfc/RFC-012-*.md`) are normative specs.
 
 ## Invariants - Never Break These
 
@@ -102,4 +102,4 @@ Default five-role label vocabulary. See `docs/agents/triage-labels.md`.
 
 ### Domain docs
 
-Multi-context layout: `CONTEXT-MAP.md` at root points to per-context `CONTEXT.md` files. See `docs/agents/domain.md`.
+Single-context layout: `CONTEXT.md` at root is the sole glossary. See `docs/agents/domain.md`.
