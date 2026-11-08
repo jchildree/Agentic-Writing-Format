@@ -7,7 +7,7 @@ export interface Location {
 
 export type TokenType =
   | "KEYWORD" | "IDENTIFIER" | "ARROW" | "OUTPUT_ARROW"
-  | "COLON" | "PIPE" | "PRIORITY" | "EOF";
+  | "COLON" | "PIPE" | "PRIORITY" | "STRING" | "NUMBER" | "EOF";
 
 export interface Token {
   type: TokenType;
@@ -146,9 +146,13 @@ export interface AIROutputContract {
   strictness: string;
 }
 
+export type Severity = "error" | "warning" | "info";
+
 export interface Diagnostic {
   code: string;
-  severity: "error" | "warning" | "info";
+  severity: Severity;
+  /** Emitting phase, derived from the code (RFC-011). Filled in by the pipeline. */
+  phase?: string;
   message: string;
   location?: Location;
 }
@@ -160,5 +164,5 @@ export interface AIR {
   execution_pipeline: AIRStep[];
   constraints: AIRConstraint[];
   output_contract: AIROutputContract;
-  diagnostics: unknown[];
+  diagnostics: Diagnostic[];
 }

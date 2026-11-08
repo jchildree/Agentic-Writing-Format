@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  compiler-ts:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: compiler/ts
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: compiler/ts/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run conformance
+      - run: node dist/cli.js check ../../examples/*.awf
+
+  spec:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Golden AIR hash (Python reference canonicalizer)
+        run: |
+          expected=$(cut -d' ' -f1 tests/golden/extract-basic/air.sha256)
+          actual=$(python3 canonicalize.py tests/golden/extract-basic/air.json | cut -d' ' -f1)
+          test "$expected" = "$actual"
+      - name: Skill adapters are in sync with skill.source.md
+        run: |
+          python3 skill/generate.py
+          git diff --exit-code skill/adapters

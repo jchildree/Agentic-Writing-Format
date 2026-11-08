@@ -1,0 +1,2 @@
+Analyze PullRequest -> Focus:Correctness Depth:Thorough | P1 Shield:Secrets => Markdown
+Evaluate TestCoverage -> Threshold:80 => Markdown

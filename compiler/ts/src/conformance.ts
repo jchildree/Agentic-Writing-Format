@@ -1,28 +1,13 @@
 import * as fs from "fs";
 import * as path from "path";
-import * as crypto from "crypto";
 import { compile } from "./pipeline";
+import { canonicalHash } from "./canonical";
 import { RCD } from "./types";
 
+// RFC-009 conformance: the golden fixture must hash byte-for-byte to the frozen value.
+
 const GOLDEN = path.resolve(__dirname, "../../../tests/golden/extract-basic");
-const EXPECTED = "f20f4ba7cb26a7408ea51d3a48e447d7d98160567199f9bae6b4617a7ee4fb7a";
-
-function sortKeys(obj: unknown): unknown {
-  if (Array.isArray(obj)) return obj.map(sortKeys);
-  if (obj !== null && typeof obj === "object") {
-    const out: Record<string, unknown> = {};
-    for (const k of Object.keys(obj as Record<string, unknown>).sort()) {
-      out[k] = sortKeys((obj as Record<string, unknown>)[k]);
-    }
-    return out;
-  }
-  return obj;
-}
-
-function canonicalHash(obj: unknown): string {
-  const bytes = Buffer.from(JSON.stringify(sortKeys(obj)), "utf8");
-  return crypto.createHash("sha256").update(bytes).digest("hex");
-}
+const EXPECTED = fs.readFileSync(path.join(GOLDEN, "air.sha256"), "utf8").trim().split(/\s+/)[0];
 
 const source = fs.readFileSync(path.join(GOLDEN, "input.awf"), "utf8");
 const rcd: RCD = JSON.parse(fs.readFileSync(path.join(GOLDEN, "rcd.json"), "utf8"));

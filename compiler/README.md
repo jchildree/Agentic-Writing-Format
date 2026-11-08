@@ -1,8 +1,9 @@
-# Layer 1 — AIL Compiler (spec-complete, implementation-stubbed)
+# Layer 1 — AIL Compiler
 
-This tree is **specified but not yet implemented**. It exists so contributors have a
-landing pad and so the two-layer architecture (ADR-0006) is legible from the file
-tree. Layer 0 (`../skill/`) ships without any of this.
+The TypeScript reference compiler in [`ts/`](ts/) is **usable**: all 15 passes run,
+the golden hash reproduces, and the `awf` CLI compiles `.awf` files to AIR or provider
+payloads. The Rust engine in [`rust/`](rust/) is not started. Layer 0 (`../skill/`)
+ships without any of this.
 
 ## The 15-pass pipeline (ADR-0002)
 

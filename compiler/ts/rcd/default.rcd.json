@@ -1,0 +1,121 @@
+{
+  "runtimeId": "AWF-Default-Runtime",
+  "capabilities": [
+    {
+      "id": "core.extract",
+      "version": "1.0",
+      "operations": [
+        "AIL.OP.EXTRACT"
+      ]
+    },
+    {
+      "id": "core.analyze",
+      "version": "1.0",
+      "operations": [
+        "AIL.OP.ANALYZE"
+      ]
+    },
+    {
+      "id": "core.synthesize",
+      "version": "1.0",
+      "operations": [
+        "AIL.OP.SYNTHESIZE"
+      ]
+    },
+    {
+      "id": "core.generate",
+      "version": "1.0",
+      "operations": [
+        "AIL.OP.GENERATE"
+      ]
+    },
+    {
+      "id": "core.transform",
+      "version": "1.0",
+      "operations": [
+        "AIL.OP.TRANSFORM"
+      ]
+    },
+    {
+      "id": "core.compare",
+      "version": "1.0",
+      "operations": [
+        "AIL.OP.COMPARE"
+      ]
+    },
+    {
+      "id": "core.evaluate",
+      "version": "1.0",
+      "operations": [
+        "AIL.OP.EVALUATE"
+      ]
+    },
+    {
+      "id": "core.convert",
+      "version": "1.0",
+      "operations": [
+        "AIL.OP.CONVERT"
+      ]
+    },
+    {
+      "id": "core.compress",
+      "version": "1.0",
+      "operations": [
+        "AIL.OP.COMPRESS"
+      ]
+    },
+    {
+      "id": "core.expand",
+      "version": "1.0",
+      "operations": [
+        "AIL.OP.EXPAND"
+      ]
+    },
+    {
+      "id": "core.optimize",
+      "version": "1.0",
+      "operations": [
+        "AIL.OP.OPTIMIZE"
+      ]
+    },
+    {
+      "id": "core.validate",
+      "version": "1.0",
+      "operations": [
+        "AIL.OP.VALIDATE"
+      ]
+    },
+    {
+      "id": "core.summarize",
+      "version": "1.0",
+      "operations": [
+        "AIL.OP.SUMMARIZE"
+      ]
+    },
+    {
+      "id": "core.translate",
+      "version": "1.0",
+      "operations": [
+        "AIL.OP.TRANSLATE"
+      ]
+    },
+    {
+      "id": "core.classify",
+      "version": "1.0",
+      "operations": [
+        "AIL.OP.CLASSIFY"
+      ]
+    },
+    {
+      "id": "core.rank",
+      "version": "1.0",
+      "operations": [
+        "AIL.OP.RANK"
+      ]
+    }
+  ],
+  "limits": {
+    "maxParallelism": 4,
+    "maxExecutionTimeMs": 60000
+  }
+}

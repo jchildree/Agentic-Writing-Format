@@ -1,6 +1,9 @@
-import { AIR } from "./types";
+import { AIR, AIRConstraint, AIRStep } from "./types";
 
-export type RuntimeId = "claude" | "openai" | "gemini" | "generic";
+// PASS-015 ARE Emission (RFC-007): AIR -> provider payload.
+
+export const RUNTIME_IDS = ["claude", "openai", "gemini", "generic"] as const;
+export type RuntimeId = typeof RUNTIME_IDS[number];
 
 export interface AREPayload {
   runtimeId: RuntimeId;
@@ -12,36 +15,53 @@ export interface ValidationResult {
   errors: string[];
 }
 
-function validate(air: AIR): ValidationResult {
-  const errors: string[] = [];
-  for (const d of air.diagnostics as Array<{ severity?: string; code?: string }>) {
-    if (d.severity === "error") errors.push(d.code ?? "unknown error diagnostic");
-  }
+export const AWF_SYSTEM_CONTEXT =
+  "You are an execution unit operating under the Agentic Writing Format (AWF). " +
+  "Execute the following directive with zero preamble and maximum fidelity to stated constraints.";
+
+export function isRuntimeId(value: string): value is RuntimeId {
+  return (RUNTIME_IDS as readonly string[]).includes(value);
+}
+
+/** RFC-007: an emitter MUST refuse AIR that carries any error-severity diagnostic. */
+export function validate(air: AIR): ValidationResult {
+  const errors = air.diagnostics.filter(d => d.severity === "error").map(d => d.code);
   return { valid: errors.length === 0, errors };
 }
 
-function reconstructDirective(air: AIR): string {
-  const parts: string[] = [];
-
-  for (const step of air.execution_pipeline) {
-    const mods = Object.entries(step.modifiers)
-      .map(([k, v]) => `${k.charAt(0).toUpperCase() + k.slice(1)}:${v}`)
-      .join(" ");
-
-    const stepCons = air.constraints
-      .filter((_, i) => i < air.constraints.length)
-      .map(c => `P${c.priority} ${c.type}:${c.rule}`)
-      .join(" ");
-
-    const modPart = mods ? ` -> ${mods}` : "";
-    const conPart = stepCons ? ` | ${stepCons}` : "";
-    parts.push(`${step.action} ${step.target}${modPart}${conPart} => ${air.output_contract.format}`);
-  }
-
-  return parts.join("\n");
+/** Values that are not bare identifiers/numbers are re-quoted so the directive stays valid AWF. */
+function formatValue(value: string): string {
+  if (/^[A-Za-z][A-Za-z0-9_]*$/.test(value) || /^[0-9]+(\.[0-9]+)?$/.test(value)) return value;
+  return `"${value.replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`;
 }
 
-const AWF_SYSTEM_CONTEXT = "You are an execution unit operating under the Agentic Writing Format (AWF). Execute the following directive with zero preamble and maximum fidelity to stated constraints.";
+function capitalize(key: string): string {
+  return key.charAt(0).toUpperCase() + key.slice(1);
+}
+
+function formatConstraint(c: AIRConstraint): string {
+  const priority = c.priority > 0 ? `P${c.priority} ` : "";
+  return `${priority}${c.type}:${formatValue(c.rule)}`;
+}
+
+/**
+ * Rebuilds canonical operator-form AWF from AIR. AIR v1 constraints and output
+ * contract are program-wide, so each step carries all of them.
+ */
+export function reconstructDirective(air: AIR): string {
+  const constraintPart = air.constraints.length
+    ? ` | ${air.constraints.map(formatConstraint).join(" ")}`
+    : "";
+
+  return air.execution_pipeline
+    .map((step: AIRStep) => {
+      const mods = Object.entries(step.modifiers)
+        .map(([key, value]) => `${capitalize(key)}:${formatValue(value)}`)
+        .join(" ");
+      return `${step.action} ${step.target} -> ${mods}${constraintPart} => ${air.output_contract.format}`;
+    })
+    .join("\n");
+}
 
 export function emit(air: AIR, runtimeId: RuntimeId): AREPayload {
   const result = validate(air);
@@ -80,9 +100,8 @@ export function emit(air: AIR, runtimeId: RuntimeId): AREPayload {
       };
 
     case "generic":
-    default:
       return {
-        runtimeId: "generic",
+        runtimeId,
         payload: { system: AWF_SYSTEM_CONTEXT, directive },
       };
   }
