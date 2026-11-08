@@ -1,4 +1,5 @@
 import { ASTProgram, SemanticGraph, ExecutionPlan, AIR, AIRStep, AIRConstraint, Diagnostic } from "./types";
+import { diag, finalizeDiagnostics } from "./diagnostics";
 
 const AIR_SCHEMA = "https://agentinstruction.org/v1/air-v1.0.0.schema.json";
 
@@ -37,6 +38,20 @@ export function lowerToAIR(ast: ASTProgram, sg: SemanticGraph, epi: ExecutionPla
 
   const hasLock = ast.body.some(s => s.constraints.some(c => c.name === "Lock"));
 
+  // AIR v1 carries a single output contract; the first statement's format wins.
+  const [first, ...rest] = ast.body;
+  const allDiagnostics = [...diagnostics];
+  for (const stmt of rest) {
+    if (stmt.outputContract.format !== first.outputContract.format) {
+      allDiagnostics.push(diag(
+        "AIL-AIR-001",
+        "warning",
+        `Output format "${stmt.outputContract.format}" differs from "${first.outputContract.format}"; AIR v1 carries one output contract, so "${first.outputContract.format}" applies.`,
+        stmt.outputContract.location,
+      ));
+    }
+  }
+
   return {
     $schema: AIR_SCHEMA,
     version: "1.0",
@@ -44,9 +59,9 @@ export function lowerToAIR(ast: ASTProgram, sg: SemanticGraph, epi: ExecutionPla
     execution_pipeline,
     constraints,
     output_contract: {
-      format: ast.body[0]?.outputContract.format ?? "Raw",
+      format: first?.outputContract.format ?? "Raw",
       strictness: hasLock ? "Absolute" : "Relative",
     },
-    diagnostics,
+    diagnostics: finalizeDiagnostics(allDiagnostics),
   };
 }
