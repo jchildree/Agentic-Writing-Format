@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GreenSide Gaming</title>
+  <meta name="description" content="GreenSide Gaming: one guild hall for games, engines, compilers, and AI agents that play by the rules." />
+  <meta name="theme-color" content="#04110a" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+  <meta property="og:title" content="GreenSide Gaming" />
+  <meta property="og:description" content="Games, engines, compilers, and AI agents: one guild hall." />
+  <meta property="og:url" content="https://greensidegaming.org/" />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="backdrop" aria-hidden="true"><div class="grid-floor"></div><div class="scanlines"></div></div>
+
+  <!-- ── HUD bar ─────────────────────────────────────────── -->
+  <header class="hud">
+    <a class="brand" href="#top" aria-label="GreenSide Gaming home">
+      <img src="assets/favicon.svg" alt="" width="28" height="28" />
+      <span>GREEN<b>SIDE</b></span>
+    </a>
+    <nav class="hud-nav" aria-label="Sections">
+      <a href="#map">World Map</a>
+      <a href="#codex">Codex</a>
+      <a href="#training">Training</a>
+      <a href="#trophies">Trophies</a>
+    </nav>
+    <button class="cycle-toggle" id="cycle-toggle" type="button" aria-pressed="false">
+      <kbd>E</kbd><span id="cycle-label">Night</span>
+    </button>
+  </header>
+
+  <main id="main">
+    <!-- ── Title screen ────────────────────────────────────── -->
+    <section class="title-screen" id="top">
+      <div class="title-copy">
+        <p class="eyebrow">greensidegaming.org · save file loaded</p>
+        <h1 class="glitch" data-text="GreenSide Gaming">GreenSide Gaming</h1>
+        <p class="lede">
+          One guild hall for every project I build: games, engines, compilers, and AI agents
+          that play by the rules. Whimsical on the surface. Deterministic underneath.
+        </p>
+        <div class="title-actions">
+          <a class="btn btn-primary" href="#map">▶ Press Start</a>
+          <a class="btn btn-ghost" href="#codex">Read the Codex</a>
+        </div>
+      </div>
+
+      <aside class="player-card" aria-label="Player card">
+        <div class="player-head">
+          <div class="avatar" aria-hidden="true">GS</div>
+          <div>
+            <p class="player-name">GreenSide</p>
+            <p class="player-class">Class: Architect / Builder</p>
+          </div>
+          <p class="player-level">Lv.<span id="player-level">0</span></p>
+        </div>
+        <div class="xp">
+          <div class="xp-label"><span>XP</span><span id="xp-text">0 / 0</span></div>
+          <div class="bar"><div class="bar-fill" id="xp-fill"></div></div>
+        </div>
+        <dl class="player-stats" id="player-stats"></dl>
+      </aside>
+    </section>
+
+    <!-- ── World map ───────────────────────────────────────── -->
+    <section class="section" id="map" aria-labelledby="map-title">
+      <header class="section-head">
+        <p class="eyebrow">01 · World Map</p>
+        <h2 id="map-title">Choose your realm</h2>
+        <p class="section-sub" id="realm-blurb">Every quest, across every repository.</p>
+      </header>
+      <div class="realm-tabs" id="realm-tabs" role="tablist" aria-label="Filter by realm"></div>
+      <div class="quest-grid" id="quest-grid" aria-live="polite"></div>
+    </section>
+
+    <!-- ── Codex ───────────────────────────────────────────── -->
+    <section class="section" id="codex" aria-labelledby="codex-title">
+      <header class="section-head">
+        <p class="eyebrow">02 · The Codex</p>
+        <h2 id="codex-title">The throughline</h2>
+        <p class="section-sub">Six techniques that keep showing up, no matter which repo you open. Pick a quest chip to warp to it.</p>
+      </header>
+      <div class="codex-grid" id="codex-grid"></div>
+    </section>
+
+    <!-- ── Training ground: decode an AWF spell ────────────── -->
+    <section class="section" id="training" aria-labelledby="training-title">
+      <header class="section-head">
+        <p class="eyebrow">03 · Training Ground</p>
+        <h2 id="training-title">Decode the spell</h2>
+        <p class="section-sub">
+          This is the frozen golden fixture from the Agentic Writing Format. One line of AWF compiles to a byte-identical result on every implementation.
+          Select each rune to read what it does.
+        </p>
+      </header>
+      <div class="terminal">
+        <div class="terminal-bar" aria-hidden="true"><i></i><i></i><i></i><span>input.awf</span></div>
+        <div class="spell" id="spell" role="group" aria-label="AWF spell runes"></div>
+        <div class="rune-readout" id="rune-readout" aria-live="polite">
+          <p class="rune-kind">Awaiting input</p>
+          <p class="rune-text">Select a rune above.</p>
+        </div>
+        <p class="hash"><span>canonical AIR sha-256</span> f20f4ba7cb26a7408ea51d3a48e447d7d98160567199f9bae6b4617a7ee4fb7a</p>
+      </div>
+    </section>
+
+    <!-- ── Trophies ────────────────────────────────────────── -->
+    <section class="section" id="trophies" aria-labelledby="trophies-title">
+      <header class="section-head">
+        <p class="eyebrow">04 · Trophy Room</p>
+        <h2 id="trophies-title">Achievements unlocked</h2>
+        <p class="section-sub">Every trophy is computed from the quest log, so none of them are made up.</p>
+      </header>
+      <ul class="trophy-grid" id="trophy-grid"></ul>
+    </section>
+  </main>
+
+  <!-- ── Footer: warp gates ───────────────────────────────── -->
+  <footer class="footer">
+    <p class="eyebrow">Warp gates</p>
+    <ul class="warp-gates" id="warp-gates"></ul>
+    <p class="fine">© <span id="year"></span> GreenSide Gaming · Press <kbd>E</kbd> to shift day and night · There may be a code.</p>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
