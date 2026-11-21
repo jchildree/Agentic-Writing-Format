@@ -1,18 +1,12 @@
 import { ASTProgram, Diagnostic } from "./types";
-
-const CORE_OPS = new Set([
-  "Extract","Analyze","Synthesize","Generate","Transform",
-  "Compare","Evaluate","Convert","Compress","Expand",
-  "Optimize","Validate","Summarize","Translate","Classify","Rank",
-  "Lock","Shield",
-]);
+import { CORE_ACTIONS } from "./lexicon";
 
 export function resolveName(ast: ASTProgram): { diagnostics: Diagnostic[] } {
   const diagnostics: Diagnostic[] = [];
   const seenResources = new Set<string>();
 
   for (const stmt of ast.body) {
-    if (!CORE_OPS.has(stmt.operator.value)) {
+    if (!CORE_ACTIONS.has(stmt.operator.value)) {
       diagnostics.push({
         code: "AIL-NAME-001",
         severity: "warning",

@@ -1,0 +1,3 @@
+Extract ErrorLogs -> Window:"last 24h" Depth:Critical | P1 Lock:RawJSON P2 Shield:PII => JSON
+Classify Incidents -> Scheme:Severity Labels:"SEV1, SEV2, SEV3" => JSON
+Rank Escalations -> By:CustomerImpact Limit:5 => JSON

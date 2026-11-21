@@ -1,13 +1,24 @@
 {
   "name": "@awf/compiler",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "main": "dist/pipeline.js",
   "scripts": {
     "build": "tsc",
-    "conformance": "node dist/conformance.js"
+    "conformance": "node dist/conformance.js",
+    "test": "npm run build && node --test dist/test/*.test.js",
+    "awf": "node dist/cli.js"
   },
   "devDependencies": {
+    "@types/node": "^22.20.5",
     "typescript": "^5.0.0"
-  }
+  },
+  "description": "Reference TypeScript compiler for the Agentic Writing Format (AWF)",
+  "bin": {
+    "awf": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "rcd"
+  ]
 }

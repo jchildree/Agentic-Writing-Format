@@ -9,7 +9,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Two layers, one shared contract:
 
 - **Layer 0** (shippable now): A portable authoring format + LLM skill. Write once (`skill/skill.source.md`), generate runtime adapters (Claude, OpenAI, Gemini, generic). No compiler needed - agents execute directly.
-- **Layer 1 / AIL** (fully specified, implementation-stubbed): A 15-pass deterministic compiler (`AWF -> AST -> SG -> EPI -> AIR -> provider payload`) in TypeScript and Rust. Must byte-reproduce the golden fixture hash to be conformant.
+- **Layer 1 / AIL** (TypeScript reference usable; Rust not started): A 15-pass deterministic compiler (`AWF -> AST -> SG -> EPI -> AIR -> provider payload`) in TypeScript and Rust. Must byte-reproduce the golden fixture hash to be conformant.
 
 ## Commands
 
@@ -24,6 +24,13 @@ python3 canonicalize.py tests/golden/extract-basic/air.json
 # Build and conformance-check the TypeScript reference compiler
 cd compiler/ts && npm install && npm run build && npm run conformance
 # Expected: PASS f20f4ba7cb26a7408ea51d3a48e447d7d98160567199f9bae6b4617a7ee4fb7a
+
+# Run the TypeScript test suite (builds first)
+cd compiler/ts && npm test
+
+# Compile / check AWF with the CLI (from compiler/ts after building)
+node dist/cli.js compile ../../examples/exec-brief.awf --emit claude
+node dist/cli.js check ../../examples/*.awf
 ```
 
 Conformance is verified when a compiler reproduces the canonical AIR hash byte-for-byte. See `RFC-009-conformance-suite.md`.

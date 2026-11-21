@@ -94,6 +94,16 @@
       "code": "AIL-EPI-005",
       "severity": "error",
       "message": "Required capability unbound by any execution node."
+    },
+    {
+      "code": "AIL-PARSE-003",
+      "severity": "error",
+      "message": "Unexpected token; the statement does not match the canonical operator form."
+    },
+    {
+      "code": "AIL-AIR-001",
+      "severity": "warning",
+      "message": "Statements declare different output formats; AIR v1 carries one output contract, so the first statement's format applies."
     }
   ],
   "migration": {
